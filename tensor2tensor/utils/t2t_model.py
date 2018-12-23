@@ -1522,9 +1522,11 @@ class T2TModel(base.Layer):
     if isinstance(infer_out, dict):
       outputs = infer_out["outputs"]
       scores = infer_out["scores"]
+      logits = infer_out.get("logits")
     else:
       outputs = infer_out
       scores = None
+      logits = None
 
     inputs = features.get("inputs")
     if inputs is None:
@@ -1533,6 +1535,7 @@ class T2TModel(base.Layer):
     predictions = {
         "outputs": outputs,
         "scores": scores,
+        "logits": logits,
         "inputs": inputs,
         "targets": features.get("infer_targets"),
     }
